@@ -2,6 +2,8 @@
 
 Simplified educational version of **Feature Space Search (FESS)** Sokoban solver (Shoham & Schaeffer, CoG 2020).
 
+![Playing a level](assets/play.png)
+
 Start here:
 
 1. Install `uv` if you haven't already. In the repository root, run `uv sync --extra dev`.
@@ -42,6 +44,8 @@ uv sync
 ```
 
 ## Play & watch FESS
+
+![Watching the FESS solver](assets/solver.png)
 
 ```bash
 uv run sokoban-fess play
