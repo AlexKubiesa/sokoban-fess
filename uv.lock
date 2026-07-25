@@ -154,6 +154,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "numpy" },
+    { name = "pygame" },
 ]
 
 [package.optional-dependencies]
@@ -161,15 +162,12 @@ dev = [
     { name = "pytest" },
     { name = "pytest-timeout" },
 ]
-play = [
-    { name = "pygame" },
-]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy", specifier = ">=1.26.0" },
-    { name = "pygame", marker = "extra == 'play'", specifier = ">=2.5.0" },
+    { name = "pygame", specifier = ">=2.5.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0.0" },
     { name = "pytest-timeout", marker = "extra == 'dev'", specifier = ">=2.3.0" },
 ]
-provides-extras = ["play", "dev"]
+provides-extras = ["dev"]

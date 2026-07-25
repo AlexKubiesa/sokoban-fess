@@ -8,6 +8,8 @@ from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Any
 
+import pygame
+
 from sokoban_fess.level import (
     BOX,
     BOX_ON_TARGET,
@@ -627,18 +629,6 @@ class EvaluationPlayer:
         self.search_viewer = None
 
 
-def _require_pygame() -> Any:
-    try:
-        import pygame
-    except ImportError as exc:  # pragma: no cover - exercised via CLI
-        raise SystemExit(
-            "Pygame is required for the interactive player.\n"
-            "Install with: uv sync --extra play\n"
-            "Or: pip install 'sokoban-fess[play]'"
-        ) from exc
-    return pygame
-
-
 def _draw_floor(pygame: Any, surface: Any, rect: Any) -> None:
     pygame.draw.rect(surface, FLOOR_COLOR, rect)
     pygame.draw.rect(surface, FLOOR_EDGE, rect, width=max(1, rect.width // 16))
@@ -834,7 +824,6 @@ def _draw_board(
 
 
 def _cell_rect(origin: tuple[int, int], cell: int, pos: tuple[int, int]) -> Any:
-    pygame = _require_pygame()
     r, c = pos
     ox, oy = origin
     return pygame.Rect(ox + c * cell, oy + r * cell, cell - 1, cell - 1)
@@ -1442,7 +1431,6 @@ def _draw_search_hud(
 
 
 def _run_pygame(player: EvaluationPlayer) -> int:
-    pygame = _require_pygame()
     pygame.init()
     pygame.display.set_caption("Sokoban FESS")
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
